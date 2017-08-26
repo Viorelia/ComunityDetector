@@ -7,6 +7,7 @@ namespace ComunityDetectorServices
         private CosineSimilarity _cosineSimilarity;
         private Dictionary<int, List<int>> _clusters;
         private Dictionary<int, Dictionary<int, double>> _similarityMatrix;
+        private List<int> _clusterCorespondents;
         private int _numberClusters; 
 
         public HierarchicalClustering(List<string> documents)
@@ -14,15 +15,16 @@ namespace ComunityDetectorServices
             _cosineSimilarity = new CosineSimilarity(documents);
             _clusters = new Dictionary<int, List<int>>();
             _similarityMatrix = new Dictionary<int, Dictionary<int, double>>();
+            _clusterCorespondents = new List<int>();
             _numberClusters = documents.Count;
         }
 
-        public Dictionary<int, List<int>> ComputeClusters()
+        public Dictionary<int, List<int>> ComputeClusters(int numberOfClusters)
         {
             InitialiseClusters();
             InitialiseSimilarityMatrix();
 
-            while (!IsQualityMeet())
+            while (!IsQualityMeet(numberOfClusters))
             {
                 int cluster1, cluster2;
                 FindMostSimilarClusters(out cluster1, out cluster2);
@@ -37,6 +39,7 @@ namespace ComunityDetectorServices
             for(int i=1; i <= _numberClusters; i++)
             {
                 _clusters.Add(i, new List<int> {i});
+                _clusterCorespondents.Add(i);
             }
         }
 
@@ -52,7 +55,7 @@ namespace ComunityDetectorServices
                 }
                 _similarityMatrix.Add(i, dictionary);
             }
-        }
+        } 
 
         private void FindMostSimilarClusters(out int cluster1, out int cluster2)
         {
@@ -88,30 +91,33 @@ namespace ComunityDetectorServices
 
             for(int index = 1; index <= _numberClusters; index++)
             {
-                if(index != cluster2)
+                var indexCorrespondent = _clusterCorespondents[index - 1];
+
+                if (indexCorrespondent != cluster2)
                 {
-                    if(index != cluster1)
+                    if(indexCorrespondent != cluster1)
                     {
-                        var numberPointsRelatedCluster = _clusters[index].Count;
-                        double relatedCluster1 = GetSimilarityValue(cluster1, index);
-                        double relatedCluster2 = GetSimilarityValue(cluster2, index);
+                        var numberPointsRelatedCluster = _clusters[indexCorrespondent].Count;
+                        double relatedCluster1 = GetSimilarityValue(cluster1, indexCorrespondent);
+                        double relatedCluster2 = GetSimilarityValue(cluster2, indexCorrespondent);
 
                         var averageSimilarity = (relatedCluster1 * (numberPointsRelatedCluster + numberPointsCluster1 - 1) +
                                                 relatedCluster2 * (numberPointsRelatedCluster + numberPointsCluster2 - 1)) /
                                                 (numberPointsRelatedCluster + numberPointsCluster1 + numberPointsCluster2 - 1);
 
-                        UpdateSimilarityValue(cluster1, index, averageSimilarity);
+                        UpdateSimilarityValue(cluster1, indexCorrespondent, averageSimilarity);
                     }
                     
-                    _similarityMatrix[index].Remove(cluster2);
+                    if(indexCorrespondent <= _similarityMatrix.Count)
+                        _similarityMatrix[indexCorrespondent].Remove(cluster2);
                 }            
             }
 
             _similarityMatrix.Remove(cluster2);
             _clusters[cluster1].AddRange(_clusters[cluster2]);
             _clusters.Remove(cluster2);
+            _clusterCorespondents.Remove(cluster2);
             _numberClusters--;
-            //keep a vector/list/dictionary where to have the association index - key of that dictionary (because ones clusters are removed)
         }
 
         private double GetSimilarityValue(int cluster1, int cluster2)
@@ -135,9 +141,9 @@ namespace ComunityDetectorServices
             }
         }
 
-        private bool IsQualityMeet()
+        private bool IsQualityMeet(int requiredClusters)
         {//research best aproach to stop the cluster merge - where the best quality of comunity
-            return _clusters.Count == 2;
+            return _clusters.Count == requiredClusters;
         }
     }
 }
