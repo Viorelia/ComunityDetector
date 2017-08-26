@@ -1,5 +1,0 @@
-D:\Work\Dizertatie\Aplicatia\ComunityDetector\ComunityDetectorServices\bin\Debug\ComunityDetectorServices.dll
-D:\Work\Dizertatie\Aplicatia\ComunityDetector\ComunityDetectorServices\bin\Debug\ComunityDetectorServices.pdb
-D:\Work\Dizertatie\Aplicatia\ComunityDetector\ComunityDetectorServices\obj\Debug\ComunityDetectorServices.dll
-D:\Work\Dizertatie\Aplicatia\ComunityDetector\ComunityDetectorServices\obj\Debug\ComunityDetectorServices.pdb
-D:\Work\Dizertatie\Aplicatia\ComunityDetector\ComunityDetectorServices\obj\Debug\ComunityDetectorServices.csprojResolveAssemblyReference.cache
