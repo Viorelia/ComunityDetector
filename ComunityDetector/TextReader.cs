@@ -9,7 +9,7 @@ namespace ComunityDetector
         private string GetPath()
         {
             string appPath = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
-            string newPath = Path.GetFullPath(Path.Combine(appPath, @"..\..\..\..\TestData3"));
+            string newPath = Path.GetFullPath(Path.Combine(appPath, @"..\..\..\..\TestData"));
 
             return newPath;
         }

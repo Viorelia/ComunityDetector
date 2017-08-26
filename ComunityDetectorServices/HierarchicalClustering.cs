@@ -108,7 +108,7 @@ namespace ComunityDetectorServices
                         UpdateSimilarityValue(cluster1, indexCorrespondent, averageSimilarity);
                     }
                     
-                    if(indexCorrespondent <= _similarityMatrix.Count)
+                    if(index <= _similarityMatrix.Count)
                         _similarityMatrix[indexCorrespondent].Remove(cluster2);
                 }            
             }
