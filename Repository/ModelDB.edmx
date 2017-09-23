@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ArticlesLibraryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ArticleReferences">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArticleTitle" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Articles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" />
+          <Property Name="Abstract" Type="nvarchar" MaxLength="4000" />
+          <Property Name="PublishedIn" Type="nvarchar" MaxLength="500" />
+          <Property Name="PublishedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Authors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="About" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="AuthorsArticleReferences">
+          <Key>
+            <PropertyRef Name="AuthorId" />
+            <PropertyRef Name="ArticleReferenceId" />
+          </Key>
+          <Property Name="AuthorId" Type="int" Nullable="false" />
+          <Property Name="ArticleReferenceId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AuthorsArticles">
+          <Key>
+            <PropertyRef Name="AuthorId" />
+            <PropertyRef Name="ArticleId" />
+          </Key>
+          <Property Name="AuthorId" Type="int" Nullable="false" />
+          <Property Name="ArticleId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__AuthorsAr__Artic__173876EA">
+          <End Role="Articles" Type="Self.Articles" Multiplicity="1" />
+          <End Role="AuthorsArticles" Type="Self.AuthorsArticles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AuthorsArticles">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AuthorsAr__Artic__1B0907CE">
+          <End Role="ArticleReferences" Type="Self.ArticleReferences" Multiplicity="1" />
+          <End Role="AuthorsArticleReferences" Type="Self.AuthorsArticleReferences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArticleReferences">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AuthorsArticleReferences">
+              <PropertyRef Name="ArticleReferenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AuthorsAr__Autho__164452B1">
+          <End Role="Authors" Type="Self.Authors" Multiplicity="1" />
+          <End Role="AuthorsArticles" Type="Self.AuthorsArticles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AuthorsArticles">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AuthorsAr__Autho__1A14E395">
+          <End Role="Authors" Type="Self.Authors" Multiplicity="1" />
+          <End Role="AuthorsArticleReferences" Type="Self.AuthorsArticleReferences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AuthorsArticleReferences">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ArticlesLibraryModelStoreContainer">
+          <EntitySet Name="ArticleReferences" EntityType="Self.ArticleReferences" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Articles" EntityType="Self.Articles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Authors" EntityType="Self.Authors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AuthorsArticleReferences" EntityType="Self.AuthorsArticleReferences" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AuthorsArticles" EntityType="Self.AuthorsArticles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AuthorsAr__Artic__173876EA" Association="Self.FK__AuthorsAr__Artic__173876EA">
+            <End Role="Articles" EntitySet="Articles" />
+            <End Role="AuthorsArticles" EntitySet="AuthorsArticles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AuthorsAr__Artic__1B0907CE" Association="Self.FK__AuthorsAr__Artic__1B0907CE">
+            <End Role="ArticleReferences" EntitySet="ArticleReferences" />
+            <End Role="AuthorsArticleReferences" EntitySet="AuthorsArticleReferences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AuthorsAr__Autho__164452B1" Association="Self.FK__AuthorsAr__Autho__164452B1">
+            <End Role="Authors" EntitySet="Authors" />
+            <End Role="AuthorsArticles" EntitySet="AuthorsArticles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AuthorsAr__Autho__1A14E395" Association="Self.FK__AuthorsAr__Autho__1A14E395">
+            <End Role="Authors" EntitySet="Authors" />
+            <End Role="AuthorsArticleReferences" EntitySet="AuthorsArticleReferences" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ArticlesLibraryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ArticleReference">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArticleTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Authors" Relationship="Self.AuthorsArticleReferences" FromRole="ArticleReferences" ToRole="Authors" />
+        </EntityType>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Abstract" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="PublishedIn" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PublishedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Authors" Relationship="Self.AuthorsArticles" FromRole="Articles" ToRole="Authors" />
+        </EntityType>
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="About" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ArticleReferences" Relationship="Self.AuthorsArticleReferences" FromRole="Authors" ToRole="ArticleReferences" />
+          <NavigationProperty Name="Articles" Relationship="Self.AuthorsArticles" FromRole="Authors" ToRole="Articles" />
+        </EntityType>
+        <Association Name="AuthorsArticleReferences">
+          <End Role="ArticleReferences" Type="Self.ArticleReference" Multiplicity="*" />
+          <End Role="Authors" Type="Self.Author" Multiplicity="*" />
+        </Association>
+        <Association Name="AuthorsArticles">
+          <End Role="Articles" Type="Self.Article" Multiplicity="*" />
+          <End Role="Authors" Type="Self.Author" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ArticlesLibraryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ArticleReferences" EntityType="Self.ArticleReference" />
+          <EntitySet Name="Articles" EntityType="Self.Article" />
+          <EntitySet Name="Authors" EntityType="Self.Author" />
+          <AssociationSet Name="AuthorsArticleReferences" Association="Self.AuthorsArticleReferences">
+            <End Role="ArticleReferences" EntitySet="ArticleReferences" />
+            <End Role="Authors" EntitySet="Authors" />
+          </AssociationSet>
+          <AssociationSet Name="AuthorsArticles" Association="Self.AuthorsArticles">
+            <End Role="Articles" EntitySet="Articles" />
+            <End Role="Authors" EntitySet="Authors" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ArticlesLibraryModelStoreContainer" CdmEntityContainer="ArticlesLibraryEntities">
+          <EntitySetMapping Name="ArticleReferences">
+            <EntityTypeMapping TypeName="ArticlesLibraryModel.ArticleReference">
+              <MappingFragment StoreEntitySet="ArticleReferences">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ArticleTitle" ColumnName="ArticleTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="ArticlesLibraryModel.Article">
+              <MappingFragment StoreEntitySet="Articles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Abstract" ColumnName="Abstract" />
+                <ScalarProperty Name="PublishedIn" ColumnName="PublishedIn" />
+                <ScalarProperty Name="PublishedDate" ColumnName="PublishedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Authors">
+            <EntityTypeMapping TypeName="ArticlesLibraryModel.Author">
+              <MappingFragment StoreEntitySet="Authors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="About" ColumnName="About" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AuthorsArticleReferences" TypeName="ArticlesLibraryModel.AuthorsArticleReferences" StoreEntitySet="AuthorsArticleReferences">
+            <EndProperty Name="ArticleReferences">
+              <ScalarProperty Name="Id" ColumnName="ArticleReferenceId" />
+            </EndProperty>
+            <EndProperty Name="Authors">
+              <ScalarProperty Name="Id" ColumnName="AuthorId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="AuthorsArticles" TypeName="ArticlesLibraryModel.AuthorsArticles" StoreEntitySet="AuthorsArticles">
+            <EndProperty Name="Articles">
+              <ScalarProperty Name="Id" ColumnName="ArticleId" />
+            </EndProperty>
+            <EndProperty Name="Authors">
+              <ScalarProperty Name="Id" ColumnName="AuthorId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

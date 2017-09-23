@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComunityDetectorServices", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComunityDetector.Web", "ComunityDetector.Web\ComunityDetector.Web.csproj", "{4421401F-CE17-4B5E-AFC9-B3D675478315}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{3635F0E4-445C-48F9-B969-4F0D0DD40599}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4421401F-CE17-4B5E-AFC9-B3D675478315}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4421401F-CE17-4B5E-AFC9-B3D675478315}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4421401F-CE17-4B5E-AFC9-B3D675478315}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3635F0E4-445C-48F9-B969-4F0D0DD40599}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3635F0E4-445C-48F9-B969-4F0D0DD40599}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3635F0E4-445C-48F9-B969-4F0D0DD40599}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3635F0E4-445C-48F9-B969-4F0D0DD40599}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

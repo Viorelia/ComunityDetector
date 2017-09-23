@@ -54,10 +54,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CosineSimilarity.cs" />
-    <Compile Include="HierarchicalClustering.cs" />
+    <Compile Include="Models\Article.cs" />
+    <Compile Include="Models\ArticleReference.cs" />
+    <Compile Include="Models\Author.cs" />
+    <Compile Include="Services\CosineSimilarity.cs" />
+    <Compile Include="Services\HierarchicalClustering.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebCrawler.cs" />
+    <Compile Include="Services\WebCrawler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
